@@ -1,0 +1,29 @@
+# Static site: no build step. Netlify serves the repo root as-is.
+[build]
+  publish = "."
+  command = ""
+
+# Security headers and caching live in the _headers file.
+# 404.html at the root is used automatically for missing pages.
+
+# Keep the working docs out of the public site.
+[[redirects]]
+  from = "/DESIGN.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/BUILD-BRIEF.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/HANDOFF.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+# Force HTTPS on the primary domain is handled by Netlify automatically
+# once a certificate is issued (Domain settings > HTTPS).
