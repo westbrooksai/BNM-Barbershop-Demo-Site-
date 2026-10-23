@@ -2,6 +2,24 @@
    BNM Barbershop: demo site stylesheet
    Swap the tokens below to re-skin this template for another client.
    ========================================================= */
+
+/* Self-hosted fonts (SIL Open Font License, see fonts/OFL.txt). Latin subset, variable weights. */
+@font-face {
+  font-family: "Inter"; font-style: normal; font-weight: 400 700; font-display: swap;
+  src: url("../fonts/inter-normal-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Playfair Display"; font-style: normal; font-weight: 500 600; font-display: swap;
+  src: url("../fonts/playfair-display-normal-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Playfair Display"; font-style: italic; font-weight: 500; font-display: swap;
+  src: url("../fonts/playfair-display-italic-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 :root {
   /* Palette (DESIGN.md section 4) */
   --c-ceiling: #0B0B0D;      /* dark section background */
@@ -255,6 +273,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   overflow: hidden; background: var(--c-ceiling) url("../images/hero-poster-shop-interior.webp") center / cover no-repeat;
   padding-bottom: clamp(5rem, 10vh, 7rem);
 }
+@media (max-width: 767.98px) { .hero { background-image: url("../images/hero-poster-shop-interior-960.webp"); } }
 .hero__media { position: absolute; inset: 0; }
 .hero__video { width: 100%; height: 100%; object-fit: cover; }
 .hero__overlay {
@@ -653,6 +672,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .toggle input { width: 22px; height: 22px; margin: .15rem 0 0; accent-color: var(--c-gold); flex: none; }
 .toggle span { display: grid; font-size: .875rem; color: var(--c-muted-on-dark); }
 .toggle strong { color: var(--c-text-on-dark); font-size: .9375rem; }
+.cookie__gpc { font-size: .8125rem; color: var(--c-gold); margin: .25rem 0 0; }
 
 /* ---------- Reveal on scroll ---------- */
 .js .reveal { opacity: 0; transform: translateY(12px); transition: opacity 280ms var(--ease), transform 280ms var(--ease); }

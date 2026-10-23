@@ -6,13 +6,13 @@
   <title>BNM Barbershop | Fades, Beard Trims &amp; Haircuts in Frederick, MD</title>
   <meta name="description" content="BNM Barbershop in Frederick, MD. Skin fades, lineups, beard sculpting, hot towel shaves and salon services. Walk-ins welcome, appointments recommended.">
   <meta name="theme-color" content="#0B0B0D">
-  <link rel="canonical" href="https://westbrooksai.github.io/BNM-Barbershop-Demo-Site-/">
+  <link rel="canonical" href="https://bnm-barbershop-demo-site.netlify.app/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="BNM Barbershop | Sharp Cuts. Clean Lines.">
   <meta property="og:description" content="Precision fades, beard work and salon services in Frederick, MD.">
-  <meta property="og:url" content="https://westbrooksai.github.io/BNM-Barbershop-Demo-Site-/">
+  <meta property="og:url" content="https://bnm-barbershop-demo-site.netlify.app/">
   <meta property="og:site_name" content="BNM Barbershop">
-  <meta property="og:image" content="https://westbrooksai.github.io/BNM-Barbershop-Demo-Site-/images/og-share.jpg">
+  <meta property="og:image" content="https://bnm-barbershop-demo-site.netlify.app/images/og-share.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -20,13 +20,13 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="BNM Barbershop | Sharp Cuts. Clean Lines.">
   <meta name="twitter:description" content="Precision fades, beard work and salon services in Frederick, MD.">
-  <meta name="twitter:image" content="https://westbrooksai.github.io/BNM-Barbershop-Demo-Site-/images/og-share.jpg">
+  <meta name="twitter:image" content="https://bnm-barbershop-demo-site.netlify.app/images/og-share.jpg">
   <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@0,500;0,600;1,500&amp;display=swap">
-  <link rel="preload" as="image" href="images/hero-poster-shop-interior.webp">
+  <link rel="preload" href="fonts/inter-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/playfair-display-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="images/hero-poster-shop-interior-960.webp" media="(max-width: 767.98px)">
+  <link rel="preload" as="image" href="images/hero-poster-shop-interior.webp" media="(min-width: 768px)">
   <link rel="stylesheet" href="css/styles.css">
   <script src="js/intro.js"></script>
   <script src="js/main.js" defer></script>
@@ -37,9 +37,9 @@
     "@type": "HairSalon",
     "name": "BNM Barbershop",
     "description": "Barbershop and salon in Frederick, MD: skin fades, lineups, beard work, hot towel shaves and women's salon services.",
-    "url": "https://westbrooksai.github.io/BNM-Barbershop-Demo-Site-/",
+    "url": "https://bnm-barbershop-demo-site.netlify.app/",
     "telephone": "+1-301-555-0123",
-    "image": "https://westbrooksai.github.io/BNM-Barbershop-Demo-Site-/images/og-share.jpg",
+    "image": "https://bnm-barbershop-demo-site.netlify.app/images/og-share.jpg",
     "priceRange": "$$",
     "address": {
       "@type": "PostalAddress",
@@ -115,7 +115,6 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero__media" aria-hidden="true">
         <video class="hero__video" muted loop playsinline preload="none"
-               poster="images/hero-poster-shop-interior.webp"
                data-src="videos/hero-shop-interior.mp4"
                data-src-mobile="videos/hero-shop-interior.mp4"></video>
       </div>
@@ -154,9 +153,9 @@
             <p>It's clean, calm and built for detail. What you see here is what you'll walk into.</p>
           </div>
           <div class="space__grid">
-            <figure class="frame reveal"><img src="images/shop-interior-hex-ceiling.webp" width="1000" height="753" loading="lazy" decoding="async" alt="The hexagon LED grid glowing across the shop's black ceiling."></figure>
-            <figure class="frame reveal"><img src="images/shop-interior-stations.webp" width="1000" height="753" loading="lazy" decoding="async" alt="Black barber stations with mirrors and a warm light strip above each one."></figure>
-            <figure class="frame reveal"><img src="images/shop-interior-chair.webp" width="1000" height="753" loading="lazy" decoding="async" alt="A polished chrome and black leather barber chair."></figure>
+            <figure class="frame reveal"><img src="images/shop-interior-hex-ceiling.webp" srcset="images/shop-interior-hex-ceiling-500.webp 500w, images/shop-interior-hex-ceiling.webp 1000w" sizes="(min-width: 1200px) 720px, (min-width: 900px) 60vw, 100vw" width="1000" height="753" loading="lazy" decoding="async" alt="The hexagon LED grid glowing across the shop's black ceiling."></figure>
+            <figure class="frame reveal"><img src="images/shop-interior-stations.webp" srcset="images/shop-interior-stations-500.webp 500w, images/shop-interior-stations.webp 1000w" sizes="(min-width: 1200px) 360px, (min-width: 900px) 30vw, 50vw" width="1000" height="753" loading="lazy" decoding="async" alt="Black barber stations with mirrors and a warm light strip above each one."></figure>
+            <figure class="frame reveal"><img src="images/shop-interior-chair.webp" srcset="images/shop-interior-chair-500.webp 500w, images/shop-interior-chair.webp 1000w" sizes="(min-width: 1200px) 360px, (min-width: 900px) 30vw, 50vw" width="1000" height="753" loading="lazy" decoding="async" alt="A polished chrome and black leather barber chair."></figure>
           </div>
         </div>
       </div>
@@ -641,6 +640,7 @@
             <li><a href="#book">Book an appointment</a></li>
             <li><a href="https://squareup.com/gift/PLACEHOLDER/order" target="_blank" rel="noopener noreferrer">Gift cards<span class="visually-hidden"> (opens in a new tab)</span></a></li>
             <li><a href="privacy.html">Privacy policy</a></li>
+            <li><a href="terms.html">Terms &amp; conditions</a></li>
             <li><button type="button" data-cookie-settings>Cookie settings</button></li>
           </ul>
         </div>
@@ -680,6 +680,7 @@
   <section class="cookie" role="dialog" aria-labelledby="cookie-title" aria-describedby="cookie-desc" data-cookie hidden>
     <h2 id="cookie-title">Your privacy, your call</h2>
     <p id="cookie-desc">We use necessary storage to run this site. With your OK we'd also load analytics and the Google map. See our <a href="privacy.html">privacy policy</a>.</p>
+    <p class="cookie__gpc" data-gpc-note hidden>Your browser's Global Privacy Control signal is on, so analytics stay off.</p>
     <form data-cookie-form>
       <fieldset class="cookie__prefs" data-cookie-prefs hidden>
         <legend>Choose what to allow</legend>

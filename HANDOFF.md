@@ -26,15 +26,24 @@
 | Reviews (6) + "4.9 from 200+" | Reviews section | Sample text, labelled as sample on the page |
 | Google reviews link | Reviews section | Generic Maps search URL |
 | Social links | Footer | Instagram, Facebook and TikTok home pages |
-| Canonical / share URLs + share image | `index.html` head, JSON-LD, `images/og-share.jpg` (1200×630) | `https://westbrooksai.github.io/BNM-Barbershop-Demo-Site-/` |
-| Analytics | `loadAnalytics()` in `js/main.js` | None installed. Add the provider here so it loads only after consent. |
-| Privacy policy | `privacy.html` | Sample text. The shop should review it. |
+| Site address | Canonical and share tags (`index.html`, `privacy.html`, `terms.html`), JSON-LD, `sitemap.xml`, `robots.txt` | `https://bnm-barbershop-demo-site.netlify.app/` |
+| Analytics | `ga4Id` in `CONFIG` at the top of `js/main.js` | Empty (off). See "Turning on Google Analytics" below. |
+| Privacy policy, terms | `privacy.html`, `terms.html` | Sample text. The shop and its attorney should review both. |
 
 ## When swapping in real media
 1. Export photos to WebP and overwrite the files with the same names in `/images`.
 2. Update the `width`/`height` attributes to the new aspect ratios to avoid layout shift.
 3. Hero video: muted, no speech (no captions needed), under ~10 MB. For a separate phone cut, add `videos/hero-shop-interior-mobile.mp4` and point `data-src-mobile` in `index.html` at it.
-4. Self-host the fonts (Playfair Display + Inter as WOFF2 in `/fonts`) for the best Lighthouse score, then remove the Google Fonts entries from the CSP.
+4. Make a 960px-wide copy of the new hero still (`hero-poster-shop-interior-960.webp`) and 500px copies of the three interior photos (`*-500.webp`); phones load these.
+
+## Turning on Google Analytics
+1. Create a GA4 property and copy its measurement ID (`G-…`).
+2. Put it in `ga4Id` in `CONFIG` at the top of `js/main.js`.
+3. In `_headers`, add Google's analytics domains to the Content-Security-Policy:
+   - `script-src`: `https://www.googletagmanager.com`
+   - `connect-src`: `https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com`
+   - `img-src`: `https://*.google-analytics.com https://*.googletagmanager.com`
+4. Push. Analytics will load only for visitors who allow it, never for browsers sending Global Privacy Control.
 
 ## Deploy (Netlify)
 - Connect the GitHub repo. No build command; the publish directory is the repo root (already set in `netlify.toml`).

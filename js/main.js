@@ -9,7 +9,11 @@
     timeZone: "America/New_York",
     consentKey: "bnm-consent-v1",
     minFormSeconds: 3,
-    reviewInterval: 7000
+    reviewInterval: 7000,
+    /* Google Analytics 4 measurement ID, e.g. "G-ABC123XYZ". Empty = no analytics.
+       It only ever loads after the visitor allows Analytics, and never with GPC on.
+       When you set it, also allow Google's analytics domains in _headers (see HANDOFF.md). */
+    ga4Id: ""
   };
 
   var $ = function (sel, ctx) { return (ctx || document).querySelector(sel); };
@@ -170,7 +174,9 @@
       if (video.paused) { video.play(); setPaused(false); } else { video.pause(); setPaused(true); }
     });
     reduceMQ.addEventListener("change", function () { if (reduced()) { video.pause(); setPaused(true); } });
-    start();
+    /* Wait for the page itself to finish loading so the video never competes with first paint. */
+    if (document.readyState === "complete") start();
+    else window.addEventListener("load", start);
   }
 
   /* ---------- Welcome paragraph lights up word by word ---------- */
@@ -396,18 +402,29 @@
     var mapBox = $("[data-map]");
     var mapOriginal = mapBox ? mapBox.innerHTML : "";
     var opener = null;
+    /* Global Privacy Control: the browser's "do not sell or share" signal forces analytics off. */
+    var gpc = navigator.globalPrivacyControl === true;
+    var gpcNote = $("[data-gpc-note]", banner);
+    if (gpc) {
+      form.elements.analytics.disabled = true;
+      if (gpcNote) gpcNote.hidden = false;
+    }
 
     function read() {
       try { return JSON.parse(localStorage.getItem(CONFIG.consentKey)); } catch (e) { return null; }
     }
+    function firstPref() {
+      return gpc ? form.elements.maps : form.elements.analytics;
+    }
     function save(c) {
+      if (gpc) c.analytics = false;
       c.ts = new Date().toISOString();
       try { localStorage.setItem(CONFIG.consentKey, JSON.stringify(c)); } catch (e) { /* storage blocked */ }
       apply(c);
     }
     function apply(c) {
       if (c && c.maps) loadMap(); else unloadMap();
-      if (c && c.analytics) loadAnalytics();
+      if (c && c.analytics && !gpc) loadAnalytics(); else unloadAnalytics();
     }
     function loadMap() {
       if (!mapBox || $("iframe", mapBox)) return;
@@ -423,8 +440,32 @@
       if (mapBox && $("iframe", mapBox)) { mapBox.innerHTML = mapOriginal; bindMapButton(); }
     }
     function loadAnalytics() {
-      /* No analytics are installed in this demo. When the client picks a provider,
-         inject its script here so it only ever loads after consent. */
+      var id = CONFIG.ga4Id;
+      if (!id) return;
+      window["ga-disable-" + id] = false;
+      if (window.gtag) return;
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      window.gtag("js", new Date());
+      window.gtag("config", id);
+      var s = document.createElement("script");
+      s.async = true;
+      s.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(id);
+      document.head.appendChild(s);
+    }
+    function unloadAnalytics() {
+      var id = CONFIG.ga4Id;
+      if (!id) return;
+      window["ga-disable-" + id] = true;
+      /* Remove GA cookies set under this host or its parent domain. */
+      document.cookie.split(";").forEach(function (c) {
+        var name = c.split("=")[0].trim();
+        if (name.indexOf("_ga") !== 0) return;
+        [location.hostname, "." + location.hostname.split(".").slice(-2).join(".")].forEach(function (d) {
+          document.cookie = name + "=; Max-Age=0; path=/; domain=" + d;
+        });
+        document.cookie = name + "=; Max-Age=0; path=/";
+      });
     }
     function bindMapButton() {
       var btn = mapBox && $("[data-load-map]", mapBox);
@@ -443,7 +484,7 @@
     }
     function show(fromSettings) {
       var c = read() || {};
-      form.elements.analytics.checked = !!c.analytics;
+      form.elements.analytics.checked = !!c.analytics && !gpc;
       form.elements.maps.checked = !!c.maps;
       banner.hidden = false;
       if (fromSettings) {
@@ -451,7 +492,7 @@
         setPrefs(true);
         banner.setAttribute("aria-modal", "true");
         banner.addEventListener("keydown", onKey);
-        form.elements.analytics.focus();
+        firstPref().focus();
       }
     }
     function hide() {
@@ -471,7 +512,7 @@
     customize.addEventListener("click", function () {
       var open = prefs.hidden;
       setPrefs(open);
-      if (open) form.elements.analytics.focus();
+      if (open) firstPref().focus();
     });
     form.addEventListener("submit", function (e) {
       e.preventDefault();
