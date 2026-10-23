@@ -4,7 +4,7 @@ A sharp, modern website concept for BNM Barbershop, a fictional barbershop and s
 
 Concept / spec design. The interior, portrait, haircut, salon and product photography and the hero video were generated with AI (Higgsfield: GPT Image 2.5 stills and a Seedance 2.5 video) for this concept. The map preview is still an illustrated placeholder. The menu, prices, team, founder story, reviews, address and contact details are sample content. The booking, gift card and loyalty links point to Square placeholders, and the contact form only sends when the site is deployed on Netlify.
 
-Live demo: not deployed yet (Netlify-ready)
+Live demo: https://westbrooksai.github.io/BNM-Barbershop-Demo-Site-/
 
 ## Highlights
 

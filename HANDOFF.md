@@ -26,7 +26,7 @@
 | Reviews (6) + "4.9 from 200+" | Reviews section | Sample text, labelled as sample on the page |
 | Google reviews link | Reviews section | Generic Maps search URL |
 | Social links | Footer | Instagram, Facebook and TikTok home pages |
-| Canonical / og URLs | `index.html` head, JSON-LD | `https://bnm-barbershop-demo.netlify.app/` |
+| Canonical / share URLs + share image | `index.html` head, JSON-LD, `images/og-share.jpg` (1200×630) | `https://westbrooksai.github.io/BNM-Barbershop-Demo-Site-/` |
 | Analytics | `loadAnalytics()` in `js/main.js` | None installed. Add the provider here so it loads only after consent. |
 | Privacy policy | `privacy.html` | Sample text. The shop should review it. |
 
